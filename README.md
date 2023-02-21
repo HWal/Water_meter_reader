@@ -3,7 +3,8 @@
 Water meter reader - This is work in progress
 =============================================
 
-This python program is aimed at converting an image of the water meter into the numbers showing water usage.
+This application witten in python is aimed at converting an image of the water meter into the numbers showing water usage.
+Instructions for use will be added when ready.
 
 Hardware
 --------

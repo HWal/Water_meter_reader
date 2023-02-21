@@ -1,0 +1,31 @@
+# MAIN README
+
+Water meter reader - This is work in progress!
+==============================================
+
+This application written in python is aimed at converting an image of the water meter into the numbers showing water usage.
+
+Hardware
+--------
+A water meter
+* An ESP32 cam webcam
+* All items are cheap, and can be found on Ebay.
+
+Files
+-----
+Two python programs.
+10 number templates in .txt format.
+A description of how to use the python programs will be added.
+
+How to use the programs:
+------------------------
+
+* Prepare an image file of the water meter face in RGB (multi band), with name: "meter_face_clr.png". The image size should ideally be 1000 x 1000 pixels. Edit the image so that the digits on the volume counter follows closely an imaginary x-axis.
+* Run the program "ToGray.py". This will generate the black/white (single band) image file: "meter_face_gr.png". You may try different enhance parameter values in the program to get the black/white image as good as possible.
+* From the color image, extract an image of each of the possible digits on the volume counter. Select a rectangle as close as possible to the digit, and save the images as "n.png" where n is the digit. if done correctly, the images should be close to, but less than (W x H) 40 x 60 pixels.
+* Run each of the "n.png" files through the program "MakeTemplate.py". Edit the input filename in the program to "n.png" and output filename to "n.txt" to suit the actual digit. Experiment with the pix_color variable to achieve a text array with 1's and 0's where the 1's collectively resembles the digit as good as possible. Normally the best value of pix_color will be in the range 57 -> 85. Now add zeros to the text area so it will hold 40 x 60 characters. In addition each line has an End-of-line character.
+* Rename each digit text file to "n_40x60.txt".
+
+Now the digit templates are ready, the production can begin. When a new 1000 x 1000 pixel RGB image file "meter_face_clr.png" is created:
+* Run it through "ToGray.py" to produce a new grayscale file "meter_face_gr.png".
+* Run "meter_face_gr.png" through "test_v11.py" to display the reading of the water meter.

@@ -4,7 +4,7 @@ def main():
     from PIL import Image, ImageOps
 
     # Use a grayscale single band version of the meter disc image
-    meter_disc_gr  = "meter_disc_gr.png"
+    meter_disc_gr  = "meter_face_gr.png"
     meter = Image.open(meter_disc_gr,"r")
 
     # General

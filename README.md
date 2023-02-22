@@ -9,6 +9,7 @@ Hardware
 --------
 * A water meter
 * An ESP32 cam webcam
+
 All items are cheap, and can be found on Ebay.
 
 Files

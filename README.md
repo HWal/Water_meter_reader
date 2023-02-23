@@ -1,7 +1,7 @@
 Water meter reader - This is work in progress!
 ==============================================
 
-These programs, written in python, is an attempt to convert an image of a water meter into the numbers showing water usage.
+An attempt to convert an image of a water meter into the numbers showing water usage.
 
 Hardware
 --------

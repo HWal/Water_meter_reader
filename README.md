@@ -8,7 +8,8 @@ Hardware
 * A water meter
 * An ESP32 cam webcam
 
-The camera is cheap, and can be found on Ebay
+The camera is cheap, and can be found on Ebay.
+
 Note: Testing at this stage is done with a mobile phone camera.
 
 

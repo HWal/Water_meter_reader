@@ -15,9 +15,9 @@ Note: Testing at this stage is done with a mobile phone camera.
 
 Files
 -----
-3 python programs.
-10 number templates in .txt format.
-Color photo of the meter.
+3 python programs.  
+10 number templates in .txt format.  
+Color photo of the meter.  
 
 Usage:
 ------

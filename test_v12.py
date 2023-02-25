@@ -5,10 +5,10 @@ def main():
     import os
 
     # Use a grayscale single band version of the meter disc image
-    meter_disc_gr  = "meter_face_gr.png"
+    meter_disc_gr  = "meter_face_gray_12.png"
     meter = Image.open(meter_disc_gr,"r")
 
-    # General
+    # General borders
     upper = 296 # Common upper horizontal line
     lower = 406 # Common lower horizontal line
     width = 50  # Wider than the digit templates (40)

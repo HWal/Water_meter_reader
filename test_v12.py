@@ -8,17 +8,17 @@ def main():
     meter_disc_gr  = "meter_face_gray_12.png"
     meter = Image.open(meter_disc_gr,"r")
 
-    # General borders
-    upper = 296 # Common upper horizontal line
-    lower = 406 # Common lower horizontal line
-    width = 50  # Wider than the digit templates (40)
+    # Common values for defining the digit areas
+    upper = 296 # Upper horizontal line
+    lower = 406 # Lower horizontal line
+    width = 50  # A little wider than the digit templates
 
-    # Digit templates have fixed size
+    # Digit templates with fixed size
     template_columns = 40
     template_rows = 60
 
     # Digit fields naming: exp0 = litres, ..., exp7 = 10000000 litres
-    # Define left and right limits of the number areas to be analyzed
+    # Define left and right borders of the number areas to be analyzed
     exp0_left = 687
     exp0_right = exp0_left + width
     exp1_left = 622

@@ -4,7 +4,7 @@ from PIL import Image, ImageEnhance, ImageOps
 import os
 
 # Open color image
-image_in0 = Image.open("meter_face_color_12.png","r")
+image_in0 = Image.open("meter_face_color.png","r")
 
 # Print band info from color image
 print image_in0.getbands()
@@ -18,7 +18,7 @@ image_in0.close()
 image_in1 = Image.open("5.png","r")
 
 # Set contrast - 0.0 gives grey image - 1.0 keeps original
-ImageEnhance.Contrast(image_in1).enhance(2.0).save('6.png')
+ImageEnhance.Contrast(image_in1).enhance(1.5).save('6.png')
 
 # Delete temporary file
 image_in1.close()
@@ -34,7 +34,7 @@ os.remove("6.png")
 
 # Set sharpness - 0.0 gives blurred image - 1.0 keeps original
 image_in3 = Image.open("7.png","r")
-ImageEnhance.Sharpness(image_in3).enhance(3.0).save('meter_face_gray_12.png')
+ImageEnhance.Sharpness(image_in3).enhance(3.0).save('meter_face_gray.png')
 
 # Print band info from color image
 print image_in3.getbands()

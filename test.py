@@ -5,35 +5,35 @@ def main():
     import os
 
     # Use a grayscale single band version of the meter disc image
-    meter_disc_gr  = "meter_face_gray_12.png"
+    meter_disc_gr  = "meter_face_gray.png"
     meter = Image.open(meter_disc_gr,"r")
 
     # Common values for defining the digit areas
-    upper = 296 # Upper horizontal line
-    lower = 406 # Lower horizontal line
-    width = 50  # A little wider than the digit templates
+    upper = 263 # Upper horizontal line
+    lower = 365 # Bottom horizontal line
+    width = 42  # A little wider than the digit templates
 
     # Digit templates with fixed size
     template_columns = 40
-    template_rows = 60
+    template_rows = 68
 
     # Digit fields naming: exp0 = litres, ..., exp7 = 10000000 litres
     # Define left and right borders of the number areas to be analyzed
-    exp0_left = 687
+    exp0_left = 637
     exp0_right = exp0_left + width
-    exp1_left = 622
+    exp1_left = 556
     exp1_right = exp1_left + width
-    exp2_left = 557
+    exp2_left = 476
     exp2_right = exp2_left + width
-    exp3_left = 490
+    exp3_left = 397
     exp3_right = exp3_left + width
-    exp4_left = 421
+    exp4_left = 318
     exp4_right = exp4_left + width
-    exp5_left = 352
+    exp5_left = 239
     exp5_right = exp5_left + width
-    exp6_left = 283
+    exp6_left = 159
     exp6_right = exp6_left + width
-    exp7_left = 216
+    exp7_left = 82
     exp7_right = exp7_left + width
 
 
@@ -51,9 +51,9 @@ def main():
                 for x in range(left, right, 1):
                     coordinate = x, y
                     pix_color = (meter.getpixel(coordinate))
-                    if pix_color < 57:
+                    if pix_color < 100:
                         val = 1
-                    if pix_color >= 57:
+                    if pix_color >= 100:
                         val = 0
                     txt_file.write(str(val))
                 txt_file.write("\n")
@@ -75,14 +75,14 @@ def main():
         exp_reader.close()
 
         # Remove file exp_.txt
-        # os.remove("exp" + str(exp_ind) + ".txt")
+        os.remove("exp" + str(exp_ind) + ".txt")
 
 
         # List of all digit templates
-        template_files = ["0_40x60.txt", "1_40x60.txt", "2_40x60.txt",
-                          "3_40x60.txt", "4_40x60.txt", "5_40x60.txt",
-                          "6_40x60.txt", "7_40x60.txt", "8_40x60.txt",
-                          "9_40x60.txt"]
+        template_files = ["0_40x68.txt", "1_40x68.txt", "2_40x68.txt",
+                          "3_40x68.txt", "4_40x68.txt", "5_40x68.txt",
+                          "6_40x68.txt", "7_40x68.txt", "8_40x68.txt",
+                          "9_40x68.txt"]
 
         # Container variables for Max hits and Found digit
         Match_max = 0
@@ -125,7 +125,7 @@ def main():
                 Match_max = match_max
                 Digit = p
 
-        print "Hits:", Match_max, ",", "Found digit:", Digit, ", Position: 10 ^", exp_ind
+        print "Hits:", "%4d"%Match_max, ",", "Found digit:", Digit, ", Position: 10 ^", exp_ind
         return Digit * (10 ** exp_ind)
     # ---------------------------- End of analyzer function -----------------------------
 

@@ -12,8 +12,8 @@ Hardware
 
 The camera is cheap, and can be found on Ebay.
 
-Files
------
+Files:
+------
 3 python programs.  
 10 number templates in .txt format.  
 Color photo of the meter.  
@@ -31,3 +31,35 @@ To get new counter numbers:
 * Provide a new photo of the meter, named: "meter_face_color.png".
 * Run "meter_face_color.png" through "ToGray.py" to produce a new grayscale file "meter_face_gray.png".
 * Run "meter_face_gray.png" through "test.py" to display the reading of the water meter.
+
+A brief explanation of how the programs work:
+---------------------------------------------
+MakeTemplate.py
+Opens an RGB image of one digit "n_40x68.png", digit n corresponds to the file name.
+Converts the image to grayscale. Now a single band image (one band, L, grayshades).
+Reads through all pixels and stores as text file where 0 is white and 1 is black.
+Opening the text file (template file) in an editor will show the digit drawn by 1's.
+Text file name: "n_40x68.txt".
+
+ToGray.py
+Opens an RGB image of the meter: "meter_face_color.png".
+Converts the image to grayscale. Now a single band image (one band, L, grayshades).
+Adjusts Contrast, Brightness and sharpness in turn, temporarily storing image after each modification.
+The finished image is stored as "meter_face_gray.png".
+All temporary files are deleted during the program run.
+
+Test.py
+Opens an L (grayshade) image of the meter "meter_face_gray.png".
+Sets borders for where the digit areas are on the meter face.
+
+Function analyzer(...):
+Reads the pixels in each digit area in turn, starting with the least significant.
+Saves area as text in same format as the template files (0's and 1's).
+Reads back the text file and places the values in an array. Removes text file.
+Reads each of the ten template files in turn and places values in array.
+For each template array, tests for correspondence (match) with the digit area array.
+Records number of matches, determines which template gives the highest number of matches.
+Highest number of matches is then determined as the actual number on the meter.
+
+Runs the function for each of the number areas on the meter face.
+From this, determines the complete reading on the meter.

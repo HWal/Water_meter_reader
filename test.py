@@ -9,8 +9,8 @@ def main():
     meter = Image.open(meter_disc_gr,"r")
 
     # Common values for defining the digit areas
-    upper = 263 # Upper horizontal line
-    lower = 365 # Bottom horizontal line
+    upper = 269 # Upper horizontal line
+    lower = 371 # Bottom horizontal line
     width = 42  # A little wider than the digit templates
 
     # Digit templates with fixed size
@@ -19,21 +19,21 @@ def main():
 
     # Digit fields naming: exp0 = litres, ..., exp7 = 10000000 litres
     # Define left and right borders of the number areas to be analyzed
-    exp0_left = 637
+    exp0_left = 636
     exp0_right = exp0_left + width
-    exp1_left = 556
+    exp1_left = 553
     exp1_right = exp1_left + width
-    exp2_left = 476
+    exp2_left = 474
     exp2_right = exp2_left + width
-    exp3_left = 397
+    exp3_left = 394
     exp3_right = exp3_left + width
-    exp4_left = 318
+    exp4_left = 316
     exp4_right = exp4_left + width
-    exp5_left = 239
+    exp5_left = 237
     exp5_right = exp5_left + width
-    exp6_left = 159
+    exp6_left = 158
     exp6_right = exp6_left + width
-    exp7_left = 82
+    exp7_left = 81
     exp7_right = exp7_left + width
 
 
@@ -51,9 +51,9 @@ def main():
                 for x in range(left, right, 1):
                     coordinate = x, y
                     pix_color = (meter.getpixel(coordinate))
-                    if pix_color < 100:
+                    if pix_color < 125:
                         val = 1
-                    if pix_color >= 100:
+                    if pix_color >= 125:
                         val = 0
                     txt_file.write(str(val))
                 txt_file.write("\n")
@@ -76,7 +76,6 @@ def main():
 
         # Remove file exp_.txt
         os.remove("exp" + str(exp_ind) + ".txt")
-
 
         # List of all digit templates
         template_files = ["0_40x68.txt", "1_40x68.txt", "2_40x68.txt",
@@ -125,9 +124,14 @@ def main():
                 Match_max = match_max
                 Digit = p
 
+            # On the meter in use here it is not easy to decode the rightmost digit properly,
+            # so we set it to zero.
+            if exp_ind == 0:
+                Digit = 0
+
         print "Hits:", "%4d"%Match_max, ",", "Found digit:", Digit, ", Position: 10 ^", exp_ind
         return Digit * (10 ** exp_ind)
-    # ---------------------------- End of analyzer function -----------------------------
+    # ------------------------------- End of analyzer function --------------------------------
 
     # Call analyzer function
     exp_ind = 0
@@ -148,7 +152,7 @@ def main():
     eighth = analyzer(exp7_left, exp7_right, upper, lower, exp_ind)
 
     print "\nMeter total value:",
-    print first + second + third + fourth + fifth + sixth + seventh + eighth,
+    print eighth + seventh + sixth + fifth + fourth + third + second + first,
 
     print "litres"
 

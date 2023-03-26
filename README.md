@@ -34,21 +34,21 @@ To get new counter numbers:
 
 A brief explanation of how the programs work:
 ---------------------------------------------
-MakeTemplate.py
+MakeTemplate.py  
 Opens an RGB image of one digit "n_40x68.png", digit n corresponds to the file name.
 Converts the image to grayscale. Now a single band image (one band, L, grayshades).
 Reads through all pixels and stores as text file where 0 is white and 1 is black.
 Opening the text file (template file) in an editor will show the digit drawn by 1's.
 Text file name: "n_40x68.txt".
 
-ToGray.py
+ToGray.py  
 Opens an RGB image of the meter: "meter_face_color.png".
 Converts the image to grayscale. Now a single band image (one band, L, grayshades).
 Adjusts Contrast, Brightness and sharpness in turn, temporarily storing image after each modification.
 The finished image is stored as "meter_face_gray.png".
 All temporary files are deleted during the program run.
 
-Test.py
+Test.py  
 Opens an L (grayshade) image of the meter "meter_face_gray.png".
 Sets borders for where the digit areas are on the meter face.
 

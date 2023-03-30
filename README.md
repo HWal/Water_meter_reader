@@ -14,7 +14,7 @@ The camera is cheap, and can be found on Ebay.
 
 Files:
 ------
-3 python programs.  
+4 python programs.  
 10 number templates in .txt format.  
 Color photo of the meter.  
 
@@ -65,7 +65,7 @@ Weighed highest number of hits is then determined as the actual number on the me
 The function is run for each of the number areas on the meter face.
 From this, the complete reading of the meter is done.
 
-MaxHitsPossible.py
+MaxHitsPossible.py  
 Running this program creates a report of the number of 1's in each digit template.
 For reference, a report is given for templates with only 1's and 0's respectively.
 Results from this program is used in the program Test.py to weigh the results.

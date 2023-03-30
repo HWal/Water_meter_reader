@@ -11,7 +11,7 @@ def main():
     # Common values for defining the digit areas
     upper = 269 # Upper horizontal line
     lower = 371 # Bottom horizontal line
-    width = 42  # A little wider than the digit templates
+    width = 50  # Wider than the digit templates
 
     # Digit templates with fixed size
     template_columns = 40
@@ -19,21 +19,21 @@ def main():
 
     # Digit fields naming: exp0 = litres, ..., exp7 = 10000000 litres
     # Define left and right borders of the number areas to be analyzed
-    exp0_left = 636
+    exp0_left = 623
     exp0_right = exp0_left + width
-    exp1_left = 553
+    exp1_left = 543
     exp1_right = exp1_left + width
-    exp2_left = 474
+    exp2_left = 464
     exp2_right = exp2_left + width
-    exp3_left = 394
+    exp3_left = 387
     exp3_right = exp3_left + width
-    exp4_left = 316
+    exp4_left = 307
     exp4_right = exp4_left + width
-    exp5_left = 237
+    exp5_left = 229
     exp5_right = exp5_left + width
-    exp6_left = 158
+    exp6_left = 150
     exp6_right = exp6_left + width
-    exp7_left = 81
+    exp7_left = 73
     exp7_right = exp7_left + width
 
 
@@ -51,9 +51,9 @@ def main():
                 for x in range(left, right, 1):
                     coordinate = x, y
                     pix_color = (meter.getpixel(coordinate))
-                    if pix_color < 125:
+                    if pix_color < 120:
                         val = 1
-                    if pix_color >= 125:
+                    if pix_color >= 120:
                         val = 0
                     txt_file.write(str(val))
                 txt_file.write("\n")
@@ -82,6 +82,11 @@ def main():
                           "3_40x68.txt", "4_40x68.txt", "5_40x68.txt",
                           "6_40x68.txt", "7_40x68.txt", "8_40x68.txt",
                           "9_40x68.txt"]
+
+        Ones_in_each_template = [1188, 876, 943,
+                                 925, 1023, 1041,
+                                 1080, 828, 1195,
+                                 1088]
 
         # Container variables for Max hits and Found digit
         Match_max = 0
@@ -119,8 +124,11 @@ def main():
                         match_max = match
                         digit = p
 
-            # Keep the found digit
-            if match_max > Match_max:
+            # For debug
+            # print match_max,
+
+            # Keep the found digit - Accept only 0.4 * number of 1s in the template
+            if (match_max > Match_max) and (match_max > int(Ones_in_each_template[p] * 0.4)):
                 Match_max = match_max
                 Digit = p
 
@@ -129,7 +137,8 @@ def main():
             if exp_ind == 0:
                 Digit = 0
 
-        print "Hits:", "%4d"%Match_max, ",", "Found digit:", Digit, ", Position: 10 ^", exp_ind
+        print "Hits:", "%4d"%Match_max, "(", "%4d"%Ones_in_each_template[Digit], ")",
+        print ",", "Found digit:", Digit, ", Position: 10 ^", exp_ind
         return Digit * (10 ** exp_ind)
     # ------------------------------- End of analyzer function --------------------------------
 
@@ -153,7 +162,6 @@ def main():
 
     print "\nMeter total value:",
     print eighth + seventh + sixth + fifth + fourth + third + second + first,
-
     print "litres"
 
 if __name__ == '__main__':

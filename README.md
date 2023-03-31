@@ -2,8 +2,8 @@ Water meter reader - This is work in progress!
 ==============================================
 
 An attempt to convert an image of a water meter into the numbers showing water usage.
-Note: All numbers in this application were set to suit my application.
-With other meters/cameras other numbers may be needed.
+Note: This is not a general application, but written around my specific water meter type.
+Other meters/cameras may need some of the code to be edited.
 
 Hardware
 --------
@@ -30,7 +30,7 @@ To get new counter numbers:
 * Note: For taking new photos, keep the camera in the same position as before.
 * Provide a new photo of the meter, named: "meter_face_color.png".
 * Run "meter_face_color.png" through "ToGray.py" to produce a new grayscale file "meter_face_gray.png".
-* Run "meter_face_gray.png" through "test.py" to display the reading of the water meter.
+* Run "meter_face_gray.png" through "Test.py" to display the reading of the water meter.
 
 A brief explanation of how the programs work:
 ---------------------------------------------
@@ -45,7 +45,7 @@ ToGray.py
 Opens an RGB image of the meter: "meter_face_color.png".
 Converts the image to grayscale. Now a single band image (one band, L, grayshades).
 Adjusts Contrast, Brightness and sharpness in turn, temporarily storing image after each modification.
-The finished image is stored as "meter_face_gray.png".
+The finished image is stored as "meter_face_gray.png". This is the file that will be decoded.
 Temporary files are deleted during the program run.
 
 Test.py  
@@ -62,10 +62,10 @@ Counts number of hits, keeping the template with the highest number of hits.
 The highest number of hits is weighed against the number of 1's in each template.
 Weighed highest number of hits is then determined as the actual number on the meter.
 
-The function is run for each of the number areas on the meter face.
+The function is run for each of the digit areas on the meter face.
 From this, the complete reading of the meter is done.
 
 MaxHitsPossible.py  
 Running this program creates a report of the number of 1's in each digit template.
 For reference, a report is given for templates with only 1's and 0's respectively.
-Results from this program is used in the program Test.py to weigh the results.
+Output from this program is used in the program Test.py to weigh the results.

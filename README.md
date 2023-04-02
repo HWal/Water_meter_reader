@@ -2,13 +2,13 @@ Water meter reader - This is work in progress!
 ==============================================
 
 An attempt to convert an image of a water meter into the numbers showing water usage.
-Note: This is not a general application, but written around my specific water meter type.
-Other meters/cameras may need some of the code to be edited.
+Note: This is not a general application. It is written around my specific water meter.
+By editing the code, other meters may have their readings decoded in the same way.
 
 Hardware
 --------
-* A water meter
-* An ESP32 cam webcam
+* A water meter, type ROSSWEINER OR MEIBES DE-09-MI001-PTB016
+* An ESP32 CAM webcam
 
 The camera is cheap, and can be found on Ebay.
 
@@ -21,21 +21,21 @@ Color photo of the meter.
 Usage:
 ------
 * Prepare an image file of the water meter face in RGB (multi band), with name: "meter_face_color.png". The image size should ideally be 800 x 600 pixels. If necessary, rotate the image so that the digits on the counter closely follows an imaginary x-axis.
-* From the image "meter_face_color.png", extract an image of each of the possible digits that can appear on the volume counter. Select a rectangle as close as possible to the digit, and save the images as "n_40x68.png" where "n" is the digit. If done correctly, the images should be close to, but less than (W x H) 40 x 68 pixels. All digit images must have the same (W x H) size.
-* Run each of the "n_40x68.png" files in turn through the program "MakeTemplate.py". Edit the input filename in the program to suit the actual digit file. Experiment with the pix_color variable to achieve a text array with 1's and 0's where the 1's collectively resembles the actual digit as closely as possible. Normally the best value of the variable pix_color will be in the range 50 -> 100. Now add or subtract zeros to the text area so it will hold 40 x 68 characters with the digit in a central position. Also correct possible stray 0's or 1's where needed. Note (and check) that each line also has an End-of-line character.
+* From "meter_face_color.png", extract an image of each of the possible digits that can appear on the volume counter. The images should be cropped to (W x H) 40 x 68 pixels, and the digit should ideally fill the image perfectly. Save the image as "n_40x68.png" where "n" is the digit.
+* Run each of the "n_40x68.png" files in turn through the program "MakeTemplate.py". Edit the input filename in the program to suit the actual digit file. Experiment with the pix_color variable to achieve a text array with 1's and 0's where the 1's collectively resembles the actual digit as closely as possible. Normally the best value of the variable pix_color will be in the range 50 -> 100. Now add or subtract zeros to the text area so it will hold 40 x 68 characters with the digit in a central position. Also correct possible stray 0's or 1's where needed. Check that each line also has an End-of-line character.
 * Run the program "ToGray.py". This will generate the black/white (single band) image file: "meter_face_gray.png". You may try and alter the different enhance parameters in the program to get the black/white image as good as possible.
-* Edit lines 11 -> 37 of "test.py" so that the program defines an area centrally around each digit place. In the application here, the areas should be 42 pixels wide and 102 pixels high. Other meters may need other numbers. Study the example values in the code to find the correct numbers for each application and digit.
+* Edit lines 11 -> 37 of "test.py" so that the program defines an area centrally around each digit place. In the application here, the areas should be 50 pixels wide and 98 pixels high. Other meters may need other numbers. Study the example values in the code to find the correct numbers for each application and digit.
 
 To get new counter numbers:
-* Note: For taking new photos, keep the camera in the same position as before.
+* Note: For taking new photos, always keep the camera in the same position.
 * Provide a new photo of the meter, named: "meter_face_color.png".
 * Run "meter_face_color.png" through "ToGray.py" to produce a new grayscale file "meter_face_gray.png".
-* Run "meter_face_gray.png" through "Test.py" to display the reading of the water meter.
+* Run the program;"Test.py" to display the reading of the water meter.
 
 A brief explanation of how the programs work:
 ---------------------------------------------
 MakeTemplate.py  
-Opens an RGB image of one digit "n_40x68.png", digit n corresponds to the file name.
+Opens an RGB image of one digit "n_40x68.png"; digit n corresponds to the file name.
 Converts the image to grayscale. Now a single band image (one band, L, grayshades).
 Reads through all pixels and stores as text file where 0 is white and 1 is black.
 Opening the text file (template file) in an editor will show the digit drawn by 1's.

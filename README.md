@@ -1,4 +1,4 @@
-Water meter reader - Work in progress!
+Water meter reader - A work in progress!
 ======================================
 
 An attempt to convert an image of a water meter into the numbers showing water usage.

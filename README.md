@@ -1,5 +1,5 @@
-Water meter reader - Work in progress!
-======================================
+Water meter reader  -  Work in progress!
+========================================
 
 An attempt to convert an image of a water meter into the numbers showing water usage.
 Note: This is not a general application. It is written around my specific water meter.
